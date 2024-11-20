@@ -9,6 +9,15 @@ NomiDate = NomiDate(2:end);
 
 %disp(size(NomiDate));
 
+%decido se plottare strenght o distr di grado
+str=input("Vuoi plottare le strenght? (Y/N)", 's'); 
+
+if lower(str)=='y'
+    str=true;
+
+else 
+    str=false;
+end
 %PULISCO DATI DA TROPPI NaN
 
 % Soglia per la percentuale di NaN
@@ -18,8 +27,8 @@ soglia = 0.1;
 threshold=2;
 
 %elementi per grafo PER QUALCHE MOTIVO NON FUNZIONA CON TUTTI VALORI POSSIBILI :(
-Nelementi=70;           %N elemnti temporali per grafo
-stepTemporali=30;       %step saltati da un grafo all'altro
+Nelementi=24;           %N elemnti temporali per grafo
+stepTemporali=18;       %step saltati da un grafo all'altro
 
 
 % Estrai solo le colonne numeriche dalla tabella
@@ -94,9 +103,10 @@ for i = 1:numGrafi
     D=degree(G);
     histogram(D, 20);
 
-    strength= trovaStrenght(G);
-    histogram(strength, 20);
-
+    if str
+        strength= trovaStrenght(G);
+        histogram(strength, 20);
+    end
     title(titoli(i));
 end
 
